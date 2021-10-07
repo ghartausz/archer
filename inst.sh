@@ -12,10 +12,10 @@ Y="\e[33m" #YELLOW
 echo
 echo -e "${Y}Time${E} ${Y}zones${E}:"
 ls /usr/share/zoneinfo
-echo "Type your ${Y}Time${E} ${Y}zone${E} from the above list"
+echo -e "Type your ${Y}Time${E} ${Y}zone${E} from the above list"
 read -r timezone
 ls /usr/share/zoneinfo/"$timezone"
-echo "Type your ${Y}City${E} from the list"
+echo -e "Type your ${Y}City${E} from the list"
 read -r city
 echo "ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime"
 ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime
