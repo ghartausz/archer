@@ -81,8 +81,7 @@ printf "${R}First part ENDED${E}"
 echo
 read -r -s -p $'Press enter to go forward with the installation..'
 cp -R archer /mnt
-echo "arch-chroot /mnt" 
-arch-chroot /mnt inst.sh
+arch-chroot /mnt /archer/inst.sh
 
 
 
