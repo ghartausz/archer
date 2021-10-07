@@ -42,5 +42,13 @@ read swap
 if [ -n "$swap" ];
   then  echo "mkswap /dev/$swap"
 fi
+echo -e "${B}Mounting${E} the partitions: "
+echo "mount dev/$root /mnt"
+mount /dev/$root /mnt
+echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
+echo "mkdir /mnt/efi" 
+mkdir /mnt/efi
+swapon /dev/$swap
+echo "swapon /dev/$swap"
 
 printf "END"
