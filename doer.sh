@@ -79,7 +79,7 @@ echo -e "Switching fromt the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo "${R}First part ENDED${E}"
 echo
-read -r -s -p $'Press enter to go forward with the installation..'
+read -r -s -p $"Press enter to go forward with the installation.."
 cd ..
 cp -R archer /mnt
 arch-chroot /mnt /archer/inst.sh
