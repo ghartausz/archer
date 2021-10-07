@@ -10,9 +10,9 @@ Y="\e[33m" #YELLOW
 #b="\e[1m" #bold
 
 echo
-echo -e "${Y}Time zones${E}:"
+echo -e "${Y}Time${E} ${Y}zones${E}:"
 ls /usr/share/zoneinfo
-echo "Type your ${Y}Time zone${E} from the above list"
+echo "Type your ${Y}Time${E} ${Y}zone${E} from the above list"
 read -r timezone
 ls /usr/share/zoneinfo/"$timezone"
 echo "Type your ${Y}City${E} from the list"
