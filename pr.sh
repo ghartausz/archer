@@ -14,10 +14,10 @@ echo -e "${Y}Time zones${E}:"
 ls /usr/share/zoneinfo
 echo "Type your ${Y}Time zone${E} from the above list"
 read -r timezone
-ls /usr/share/zoneinfo/$timezone
+ls /usr/share/zoneinfo/"$timezone"
 echo "Type your ${Y}City${E} from the list"
 read -r city
 echo "ln -sf /usr/share/zoneinfo/$timezone/$city /etc/localtime"
-ln -sf /usr/share/zoneinfo/$timezone/$city /etc/localtime
+ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime
 echo "hwclock --systohc"
 hwclock --systohc
