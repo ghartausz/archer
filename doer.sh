@@ -28,7 +28,7 @@ echo -e "${B}Identifying${E} devices and paritions: "
 lsblk
 echo
 echo -e "Choose the disk/device for ${B}partitioning ${E}: "
-read thesda
+read -r thesda
 echo -e "${B}Partitioning${E} with gdisk utility: "
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
 echo
@@ -36,18 +36,18 @@ gdisk /dev/$thesda
 echo
 echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
-read boot 
+read -r boot 
 if [ -n "$boot" ];
   then echo "mkfs.fat -F32 /dev/$boot"
   else echo "tralala"
 fi
 echo -e "The root ${P}partition${E}: "
-read root 
+read -r root 
 if [ -n "$root" ];
   then echo "mkfs.ext4 /dev/$root"    
 fi
 echo -e "The swap ${C}partition${E}: "
-read swap 
+read -r swap 
 if [ -n "$swap" ];
   then  echo "mkswap /dev/$swap"
 fi
