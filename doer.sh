@@ -18,11 +18,11 @@ echo -e "Ping${G}Google${E} : "
 ping -c 3 google.com
 echo -e "Updating system ${LB}clock${E}: "
 timedatectl set-ntp true
-echo -e "${B}Identifying${E} devices and paritions: "
+echo -e "${B} Identifying${E} devices and paritions: "
 lsblk
 echo -e "Choose the disk/device for ${B}partitioning ${E}: "
 read thesda
-echo -e "${B}Partitioning${E} with gdisk utility: "
+echo -e "${B} Partitioning${E} with gdisk utility: "
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk " 
 gdisk /dev/$thesda
 echo -e "${B}Formating${E} the partitions: "
