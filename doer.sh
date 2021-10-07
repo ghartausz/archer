@@ -15,7 +15,7 @@ echo " "
 echo -e "${G}Network${E} interfaces: "
 ip link
 echo
-echo -e "${G} PingGoogle${E} : "
+echo -e "${G}PingGoogle${E} : "
 ping -c 3 google.com
 echo
 echo -e "Updating system ${LB}clock${E}: "
