@@ -30,7 +30,7 @@ echo
 echo -e "Choose the disk/device for ${B}partitioning ${E}: "
 read thesda
 echo -e "${B}Partitioning${E} with gdisk utility: "
-echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk "
+echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
 echo
 gdisk /dev/$thesda
 echo
