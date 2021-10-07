@@ -21,6 +21,7 @@ echo "ln -sf /usr/share/zoneinfo/$timezone/$city /etc/localtime"
 ln -sf /usr/share/zoneinfo/$timezone/$city /etc/localtime
 echo "hwclock --systohc"
 hwclock --systohc
+read -r -s -p $"Press enter to go forward with the installation.."
 echo 
 echo -e "${B}Uncommenting${E}the en_US.UTF-8 UTF-8 line"
 sed -i '19,$s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
