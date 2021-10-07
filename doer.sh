@@ -80,6 +80,7 @@ echo
 echo "${R}First part ENDED${E}"
 echo
 read -r -s -p $'Press enter to go forward with the installation..'
+cd ..
 cp -R archer /mnt
 arch-chroot /mnt /archer/inst.sh
 
