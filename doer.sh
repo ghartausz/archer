@@ -66,13 +66,22 @@ echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
 lsblk
 echo
 #echo -e "Press ${G}ENTER${E} to continue..."
-echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E}"
+echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E} and ${G}git${E} ofc"
 read -r -s -p $'Press enter to go forward with the installation..'
 echo "pacstrap /mnt base linux linux-firmware"
 pacstrap /mnt base linux linux-firmware
 echo
-
+echo "genfstab -U /mnt >> /mnt/etc/fstab"
+genfstab -U /mnt >> /mnt/etc/fstab
+echo
+echo -e "Switching fromt the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
+#echo -e "Download the git package with: git clone https://github.com/ghartausz/archer.git"
+echo
 printf "${R}First part ENDED${E}"
 read -r -s -p $'Press enter to go forward with the installation..'
-sh ./inst.sh
+cp -R archer /mnt
+echo "arch-chroot /mnt" 
+arch-chroot /mnt
+
+
 
