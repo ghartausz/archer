@@ -30,13 +30,16 @@ echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read boot 
 if [ -n boot]
   then "mkfs.fat -F32 /dev/$boot"
+fi
 echo -e "The root ${P}partition${E}: "
 read root 
 if [ -n root]
   then echo "mkfs.ext4 /dev/$root"    
+fi
 echo -e "The swap ${C}partition${E}: "
 read swap 
 if [ -n swap]
   then  echo "mkswap /dev/$swap"
+fi
 
 printf "END"
