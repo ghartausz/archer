@@ -6,6 +6,8 @@ G="\e[32m" #GREEN
 LB="\e[1;34m" #LIGHT BLUE
 B="\e[34m" #BLUE
 P="\e[35m" #PURPLE
+Y="\e[33m" #YELLOW
+
 
 echo -e "Multiple setps wait ahead, choose ${C}wisely${E}:"
 echo " "
@@ -62,5 +64,15 @@ echo "swapon /dev/$swap"
 swapon /dev/$swap
 echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
 lsblk
+echo
+#echo -e "Press ${G}ENTER${E} to continue..."
+echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E}"
+read -r -s -p $'Press enter to go forward with the installation..'
+echo "pacstrap /mnt base linux linux-firmware"
+pacstrap /mnt base linux linux-firmware
+echo
 
-printf "END"
+printf "${R}First part ENDED${E}"
+read -r -s -p $'Press enter to go forward with the installation..'
+sh ./inst.sh
+
