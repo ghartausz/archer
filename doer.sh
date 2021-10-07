@@ -9,22 +9,29 @@ P="\e[35m" #PURPLE
 
 echo -e "Multiple setps wait ahead, choose ${C}wisely${E}:"
 echo " "
-echo -e "Checking for${C} EFI ${E} mode"
+echo -e "Checking for${C} EFI ${E} mode:"
 ls /sys/firmware/efi/efivars
 echo " "
 echo -e "${G}Network${E} interfaces: "
 ip link
-echo -e "Ping${G}Google${E} : "
+echo
+echo -e "${G} PingGoogle${E} : "
 ping -c 3 google.com
+echo
 echo -e "Updating system ${LB}clock${E}: "
+echo "timedatectl set-ntp true"
 timedatectl set-ntp true
-echo -e "${B} Identifying${E} devices and paritions: "
+echo
+echo -e "${B}Identifying${E} devices and paritions: "
 lsblk
+echo
 echo -e "Choose the disk/device for ${B}partitioning ${E}: "
 read thesda
-echo -e "${B} Partitioning${E} with gdisk utility: "
-echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk " 
+echo -e "${B}Partitioning${E} with gdisk utility: "
+echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk "
+echo
 gdisk /dev/$thesda
+echo
 echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read boot 
@@ -42,6 +49,7 @@ read swap
 if [ -n "$swap" ];
   then  echo "mkswap /dev/$swap"
 fi
+echo
 echo -e "${B}Mounting${E} the partitions: "
 echo "mount /dev/$root /mnt"
 mount /dev/$root /mnt
@@ -52,4 +60,7 @@ echo "mount /dev/$boot /mnt/efi"
 mount /dev/$boot /mnt/efi
 echo "swapon /dev/$swap"
 swapon /dev/$swap
+echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
+lsblk
+
 printf "END"
