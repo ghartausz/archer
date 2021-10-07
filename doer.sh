@@ -32,7 +32,7 @@ read -r thesda
 echo -e "${B}Partitioning${E} with gdisk utility: "
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
 echo
-gdisk /dev/$thesda
+gdisk /dev/"$thesda"
 echo
 echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
@@ -54,14 +54,14 @@ fi
 echo
 echo -e "${B}Mounting${E} the partitions: "
 echo "mount /dev/$root /mnt"
-mount /dev/$root /mnt
+mount /dev/"$root" /mnt
 echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
 echo "mkdir /mnt/efi" 
 mkdir /mnt/efi
 echo "mount /dev/$boot /mnt/efi"
-mount /dev/$boot /mnt/efi
+mount /dev/"$boot" /mnt/efi
 echo "swapon /dev/$swap"
-swapon /dev/$swap
+swapon /dev/"$swap"
 echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
 lsblk
 echo
@@ -83,6 +83,3 @@ read -r -s -p $'Press enter to go forward with the installation..'
 cd ..
 cp -R archer /mnt
 arch-chroot /mnt /archer/inst.sh
-
-
-
