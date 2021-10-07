@@ -28,18 +28,15 @@ gdisk /dev/$thesda
 echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read boot 
-if [ -z boot]
-  then
-  else  "mkfs.fat -F32 /dev/$boot" 
+if [ -n boot]
+  then "mkfs.fat -F32 /dev/$boot"
 echo -e "The root ${P}partition${E}: "
 read root 
-if [ -z root]
-  then
-  else  echo "mkfs.ext4 /dev/$root"
+if [ -n root]
+  then echo "mkfs.ext4 /dev/$root"    
 echo -e "The swap ${C}partition${E}: "
 read swap 
-if [ -z swap]
-  then
-  else  echo "mkswap /dev/$swap"
+if [ -n swap]
+  then  echo "mkswap /dev/$swap"
 
 printf "END"
