@@ -78,10 +78,11 @@ echo -e "Switching fromt the live ${Y}iso/arch install${E} to the recently insta
 #echo -e "Download the git package with: git clone https://github.com/ghartausz/archer.git"
 echo
 printf "${R}First part ENDED${E}"
+echo
 read -r -s -p $'Press enter to go forward with the installation..'
 cp -R archer /mnt
 echo "arch-chroot /mnt" 
-arch-chroot /mnt
+arch-chroot /mnt inst.sh
 
 
 
