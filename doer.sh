@@ -4,8 +4,8 @@ C="\e[36m" #CYAN
 E="\e[0m" #ENDCOLOR
 G="\e[32m" #GREEN
 LB="\e[1;34m" #LIGHT BLUE
-B=="\e[34m" #BLUE
-P=="\e[35m" #PURPLE
+B="\e[34m" #BLUE
+P="\e[35m" #PURPLE
 
 echo -e "Multiple setps wait ahead, choose ${C}wisely${E}:"
 echo " "
