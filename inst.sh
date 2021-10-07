@@ -8,7 +8,7 @@ B="\e[34m" #BLUE
 P="\e[35m" #PURPLE
 Y="\e[33m" #YELLOW
 
-echo -e "${Y}Time zones${E}:
+echo -e "${Y}Time zones${E}:"
 ls /usr/share/zoneinfo
 echo "Type your ${Y}Time zone${E} from the above list"
 read timezone
