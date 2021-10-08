@@ -120,7 +120,7 @@ echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-sed -n '99,$p' doer.sh > /mnt/inst.sh
+sed -n '130,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 read -r -s -p $"Press ENTER to go forward with the installation.."
