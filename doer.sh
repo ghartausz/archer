@@ -188,7 +188,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo
 systemctl enable NetworkManager
 echo
-echo -e "Enter your ${G}username${E}"
+echo -e "Enter your ${G}username${E}:"
 read username
 useradd -m $username
 usermod -aG wheel $username
