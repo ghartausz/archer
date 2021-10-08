@@ -40,8 +40,18 @@ echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read -r boot 
 if [ -n "$boot" ];
 then 
-  echo "mkfs.fat -F32 /dev/$boot"
-  mkfs.fat -F32 /dev/$boot
+  while true; do
+    read -p "Do you want to formate this partition? Y/N" yn
+    case $yn in
+        [Yy]* ) echo "mkfs.fat -F32 /dev/$boot"
+                mkfs.fat -F32 /dev/$boot 
+                echo "mount /dev/$root /mnt"
+                mount /dev/"$root" ;;
+        [Nn]* ) echo "mount /dev/$root /mnt"
+                mount /dev/"$root" /mnt;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done  
 else echo "tralla"
 fi
 echo -e "The root ${P}partition${E}: "
@@ -64,6 +74,7 @@ echo
 echo -e "${B}Mounting${E} the partitions: "
 echo "mount /dev/$root /mnt"
 mount /dev/"$root" /mnt
+echo
 echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
 echo "mkdir /mnt/efi" 
 mkdir /mnt/efi
@@ -89,8 +100,9 @@ echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-sed -n '89,$p' doer.sh > /mnt/inst.sh
+sed -n '99,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
+echo -e "${G}Second file comitted ok{E}"
 read -r -s -p $"Press ENTER to go forward with the installation.."
 arch-chroot /mnt ./inst.sh
 exit 0
