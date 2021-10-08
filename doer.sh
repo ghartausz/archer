@@ -195,5 +195,7 @@ sed -i '94s/#Include/Include/g' /etc/pacman.conf
 # use -e for displaying the changes only
 echo -e "${G}Updating system${E}:"
 pacman -Syu
+echo -e "${B}Unmounting everything${E}:"
+umount -R /mnt
 
 
