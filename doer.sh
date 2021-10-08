@@ -189,13 +189,17 @@ echo -e "Enter your ${G}username${E}"
 read username
 useradd -m $username
 passwd $username
+echo
 echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
 sed -i '/multilib]/s/^#//g' /etc/pacman.conf
 sed -i '94s/#Include/Include/g' /etc/pacman.conf
+echo
 # use -e for displaying the changes only
 echo -e "${G}Updating system${E}:"
 pacman -Syu
+echo
 echo -e "${B}Unmounting everything${E}:"
+echo "If not successful type 'umount -R /mnt'"
 exit
 umount -R /mnt
 
