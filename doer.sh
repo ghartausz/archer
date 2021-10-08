@@ -138,16 +138,20 @@ P="\e[35m" #PURPLE
 Y="\e[33m" #YELLOW
 echo
 echo -e "${Y}Time${E} ${Y}zones${E}:"
+echo
 ls /usr/share/zoneinfo
+echo
 echo -e "Type your ${Y}Time${E} ${Y}zone${E} from the above list"
 read -r timezone
 ls /usr/share/zoneinfo/"$timezone"
+echo
 echo -e "Type your ${Y}City${E} from $timezone"
 read -r city
 echo "ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime"
 ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime
 echo "hwclock --systohc"
 hwclock --systohc
+echo
 read -r -s -p $"Press enter to go forward with the installation.."
 echo 
 echo -e "${B}Uncommenting${E}the en_US.UTF-8 UTF-8 line"
@@ -183,11 +187,11 @@ systemctl enable NetworkManager
 echo
 echo -e "Enter your ${G}username${E}"
 read username
-useradd -m -G $username
+useradd -m $username
 passwd $username
 echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
 sed -i '/multilib]/s/^#//g' /etc/pacman.conf
-sed -i '94s/#Include/Include/g' /etc/locale.gen 
+sed -i '94s/#Include/Include/g' /etc/pacman.conf
 # use -e for displaying the changes only
 echo -e "${G}Updating system${E}:"
 pacman -Syu
