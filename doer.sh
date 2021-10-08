@@ -181,7 +181,7 @@ echo
 echo -e "Next step...bootloader"
 echo -e "Installing ${G}GRUB${E}"
 pacman -S grub efibootmgr os-prober ntfs-3g
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable 
 grub-mkconfig -o /boot/grub/grub.cfg
 echo
 systemctl enable NetworkManager
