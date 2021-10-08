@@ -56,7 +56,7 @@ then
 else echo "tralla"
 fi
 
-echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
+echo -e "Give the ${LB}boot/efi partition${E} or hit ENTER: "
 read -r boot 
 if [ -n "$boot" ];
 then 
@@ -82,7 +82,7 @@ else echo "tralla"
 fi
 
 
-echo -e "Choose the swap ${C}partition${E}: "
+echo -e "Choose the ${C}swap partition${E}: "
 read -r swap 
 if [ -n "$swap" ];
 then
@@ -93,7 +93,7 @@ then
 else echo "tralla"
 fi
 echo
-echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
+echo -e "The created ${LB}partition${E} table with ${LB}mounted partitions${E}:"
 lsblk
 echo
 #echo -e "Press ${G}ENTER${E} to continue..."
@@ -102,7 +102,7 @@ read -r -s -p $'Press enter to go forward with the installation..'
 echo "pacstrap /mnt base linux linux-firmware"
 pacstrap /mnt base linux linux-firmware
 echo
-echo -E "${C}genfstab${E} -U /mnt >> /mnt/etc/fstab"
+echo -e "${C}genfstab${E} -U /mnt >> /mnt/etc/fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 echo
 echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
@@ -112,7 +112,7 @@ echo -e "${R}First part ENDED${E}"
 echo
 sed -n '99,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
-echo -e "${G}Second file comitted ok{E}"
+echo -e "${G}Second file comitted ok${E}"
 read -r -s -p $"Press ENTER to go forward with the installation.."
 arch-chroot /mnt ./inst.sh
 exit 0
