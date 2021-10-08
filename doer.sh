@@ -49,8 +49,8 @@ then
                 echo "mount /dev/$root /mnt"
                 mount /dev/"$root" /mnt; break;;
         [Nn]* ) echo "mount /dev/$root /mnt"
-                mount /dev/"$root" /mnt;;
-        * ) echo "Please answer yes or no.";break;;
+                mount /dev/"$root" /mnt;break;;;
+        * ) echo "Please answer yes or no.";;
     esac
   done  
 else echo "tralla"
