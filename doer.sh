@@ -174,8 +174,8 @@ mkinitcpio -P
 echo -e "Type in your ${R}root password${E}:"
 passwd
 echo
-echo -e "Installing some packages like ${G}networkmanager${E}..."
-pacman -S networkmanager
+echo -e "Installing some packages like ${G}networkmanager${E} ${P}nano${E} ${P}base-devel${E}..."
+pacman -S networkmanager nano base-devel
 echo
 echo -e "Next step...bootloader"
 echo -e "Installing ${G}GRUB${E}"
@@ -188,6 +188,7 @@ echo
 echo -e "Enter your ${G}username${E}"
 read username
 useradd -m $username
+usermod -aG wheel $username
 passwd $username
 echo
 echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
