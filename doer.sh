@@ -36,6 +36,26 @@ echo
 gdisk /dev/"$thesda"
 echo
 echo -e "${B}Formating${E} the partitions: "
+
+echo -e "Give the ${R}root partition${E} or hit ENTER: "
+read -r root 
+if [ -n "$root" ];
+then 
+  while true; do
+    read -p "Do you want to formate this partition? Y/N" yn
+    case $yn in
+        [Yy]* ) echo "mkfs.ext4 /dev/$root"
+                mkfs.ext4 /dev/$root
+                echo "mount /dev/$root /mnt"
+                mount /dev/"$root" /mnt; break;;
+        [Nn]* ) echo "mount /dev/$root /mnt"
+                mount /dev/"$root" /mnt;;
+        * ) echo "Please answer yes or no.";break;;
+    esac
+  done  
+else echo "tralla"
+fi
+
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read -r boot 
 if [ -n "$boot" ];
@@ -45,43 +65,33 @@ then
     case $yn in
         [Yy]* ) echo "mkfs.fat -F32 /dev/$boot"
                 mkfs.fat -F32 /dev/$boot 
-                echo "mount /dev/$root /mnt"
-                mount /dev/"$root" ;;
-        [Nn]* ) echo "mount /dev/$root /mnt"
-                mount /dev/"$root" /mnt;;
+                echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
+                echo "mkdir /mnt/efi" 
+                mkdir /mnt/efi
+                echo "mount /dev/$boot /mnt/efi"
+                mount /dev/"$boot" /mnt/efi;break;;
+        [Nn]* ) echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
+                echo "mkdir /mnt/efi" 
+                mkdir /mnt/efi
+                echo "mount /dev/$boot /mnt/efi"
+                mount /dev/"$boot" /mnt/efi;break;;
         * ) echo "Please answer yes or no.";;
     esac
   done  
 else echo "tralla"
 fi
-echo -e "The root ${P}partition${E}: "
-read -r root 
-if [ -n "$root" ];
-then 
-  echo "mkfs.ext4 /dev/$root"
-  mkfs.ext4 /dev/$root
-  else echo "tralla"
-fi
-echo -e "The swap ${C}partition${E}: "
+
+
+echo -e "Choose the swap ${C}partition${E}: "
 read -r swap 
 if [ -n "$swap" ];
 then
   echo "mkswap /dev/$swap"
   mkswap /dev/$swap
+  echo "swapon /dev/$swap"
+  swapon /dev/"$swap"
 else echo "tralla"
 fi
-echo
-echo -e "${B}Mounting${E} the partitions: "
-echo "mount /dev/$root /mnt"
-mount /dev/"$root" /mnt
-echo
-echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
-echo "mkdir /mnt/efi" 
-mkdir /mnt/efi
-echo "mount /dev/$boot /mnt/efi"
-mount /dev/"$boot" /mnt/efi
-echo "swapon /dev/$swap"
-swapon /dev/"$swap"
 echo
 echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
 lsblk
