@@ -196,6 +196,8 @@ sed -i '94s/#Include/Include/g' /etc/pacman.conf
 echo -e "${G}Updating system${E}:"
 pacman -Syu
 echo -e "${B}Unmounting everything${E}:"
+exit
 umount -R /mnt
+
 
 
