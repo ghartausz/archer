@@ -39,18 +39,26 @@ echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the boot/efi ${LB}partition${E} or hit ENTER: "
 read -r boot 
 if [ -n "$boot" ];
-  then echo "mkfs.fat -F32 /dev/$boot"
-  else echo "tralala"
+then 
+  echo "mkfs.fat -F32 /dev/$boot"
+  mkfs.fat -F32 /dev/$boot
+else echo "tralla"
 fi
 echo -e "The root ${P}partition${E}: "
 read -r root 
 if [ -n "$root" ];
-  then echo "mkfs.ext4 /dev/$root"    
+then 
+  echo "mkfs.ext4 /dev/$root"
+  mkfs.ext4 /dev/$root
+  else echo "tralla"
 fi
 echo -e "The swap ${C}partition${E}: "
 read -r swap 
 if [ -n "$swap" ];
-  then  echo "mkswap /dev/$swap"
+then
+  echo "mkswap /dev/$swap"
+  mkswap /dev/$swap
+else echo "tralla"
 fi
 echo
 echo -e "${B}Mounting${E} the partitions: "
@@ -63,6 +71,7 @@ echo "mount /dev/$boot /mnt/efi"
 mount /dev/"$boot" /mnt/efi
 echo "swapon /dev/$swap"
 swapon /dev/"$swap"
+echo
 echo -e "The created ${LB}partition${E} table with mounted ${LB}partitions${E}:"
 lsblk
 echo
@@ -78,12 +87,12 @@ echo
 echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
 #echo -e "Download the git package with: git clone https://github.com/ghartausz/archer.git"
 echo
-echo "${R}First part ENDED${E}"
+echo -e "${R}First part ENDED${E}"
 echo
-read -r -s -p $"Press enter to go forward with the installation.."
-sed -n 89,130p doer.sh > /mnt/inst.sh
+read -r -s -p $"Press ENTER to go forward with the installation.."
+sed -n '89,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
-arch-chroot /mnt inst.sh
+arch-chroot /mnt ./inst.sh
 exit 0
 
 #---SECOND PART---#
@@ -126,7 +135,7 @@ echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 echo
 echo -e "${P}Initramfs${E}"
 mkinitcpio -P
-echo -e "Type in your ${R}root password${R}:"
+echo -e "Type in your ${R}root password${E}:"
 passwd
 echo
 echo -e "Installing some packages like ${G}networkmanager${E}..."
