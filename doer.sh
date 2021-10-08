@@ -67,10 +67,10 @@ then
         [Yy]* ) echo "mkfs.fat -F32 /dev/$boot"
                 mkfs.fat -F32 /dev/$boot 
                 echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
-                echo "mkdir /mnt/boot" 
-                mkdir /mnt/boot
-                echo "mount /dev/$boot /mnt/boot"
-                mount /dev/"$boot" /mnt/boot;break;;
+                echo "mkdir /mnt/efi" 
+                mkdir /mnt/efi
+                echo "mount /dev/$boot /mnt/efi"
+                mount /dev/"$boot" /mnt/efi;break;;
         [Nn]* ) echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
                 echo "mkdir /mnt/efi" 
                 mkdir /mnt/efi
