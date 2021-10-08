@@ -138,6 +138,8 @@ B="\e[34m" #BLUE
 P="\e[35m" #PURPLE
 Y="\e[33m" #YELLOW
 echo
+echo -e "${G}Second file reached ok${E}"
+echo
 echo -e "${Y}Time${E} ${Y}zones${E}:"
 echo
 ls /usr/share/zoneinfo
