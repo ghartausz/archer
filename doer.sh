@@ -35,6 +35,7 @@ echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new p
 echo
 gdisk /dev/"$thesda"
 echo
+#lslblk
 echo -e "${B}Formating${E} the partitions: "
 
 echo -e "Give the ${R}root partition${E} or hit ENTER: "
