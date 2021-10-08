@@ -189,6 +189,7 @@ echo -e "Enter your ${G}username${E}"
 read username
 useradd -m $username
 usermod -aG wheel $username
+echo "$username ALL=(ALL) ALL" >> /etc/sudoers.d/$username
 passwd $username
 echo
 echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
