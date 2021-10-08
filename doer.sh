@@ -49,7 +49,7 @@ then
                 echo "mount /dev/$root /mnt"
                 mount /dev/"$root" /mnt; break;;
         [Nn]* ) echo "mount /dev/$root /mnt"
-                mount /dev/"$root" /mnt;break;;;
+                mount /dev/"$root" /mnt;break;;
         * ) echo "Please answer yes or no.";;
     esac
   done  
