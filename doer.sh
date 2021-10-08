@@ -97,10 +97,20 @@ echo -e "The created ${LB}partition${E} table with ${LB}mounted partitions${E}:"
 lsblk
 echo
 #echo -e "Press ${G}ENTER${E} to continue..."
-echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E} and ${G}git${E} ofc"
-read -r -s -p $'Press enter to go forward with the installation..'
-echo "pacstrap /mnt base linux linux-firmware"
-pacstrap /mnt base linux linux-firmware
+ while true; do
+    read -p "Do you want to install the firmware? Y/N" yn
+    case $yn in
+        [Yy]* ) echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E} and ${G}git${E} ofc"
+                echo "pacstrap /mnt base linux linux-firmware"
+                pacstrap /mnt base linux linux-firmware; break;;
+        [Nn]* ) echo "firmware install skipped";break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done  
+
+
+#read -r -s -p $'Press enter to go forward with the installation..'
+
 echo
 echo -e "${C}genfstab${E} -U /mnt >> /mnt/etc/fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
