@@ -157,6 +157,7 @@ echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
 sed -i '/multilib]/s/^#//g' /etc/pacman.conf
 sed -i '94s/#Include/Include/g' /etc/locale.gen 
 # use -e for displaying the changes only
-
+echo -e "${G}Updating system${E}:"
+pacman -Syu
 
 
