@@ -175,7 +175,7 @@ echo -e "Type in your ${R}root password${E}:"
 passwd
 echo
 echo -e "Installing some packages like ${G}networkmanager${E} ${P}nano${E} ${P}base-devel${E}..."
-pacman -S networkmanager nano base-devel
+pacman -S --noconfirm networkmanager nano base-devel
 echo
 echo -e "Next step...bootloader"
 echo -e "Installing ${G}GRUB${E}"
