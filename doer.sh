@@ -89,9 +89,9 @@ echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-read -r -s -p $"Press ENTER to go forward with the installation.."
 sed -n '89,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
+read -r -s -p $"Press ENTER to go forward with the installation.."
 arch-chroot /mnt ./inst.sh
 exit 0
 
