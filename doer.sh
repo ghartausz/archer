@@ -198,6 +198,8 @@ echo
 echo -e "${G}Updating system${E}:"
 pacman -Syu
 echo
+echo -e "${R}DONE${E}"
+echo
 echo -e "${B}Unmounting everything${E}:"
 echo "If not successful type 'umount -R /mnt'"
 exit
