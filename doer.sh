@@ -81,7 +81,7 @@ read -r -s -p $'Press enter to go forward with the installation..'
 echo "pacstrap /mnt base linux linux-firmware"
 pacstrap /mnt base linux linux-firmware
 echo
-echo "genfstab -U /mnt >> /mnt/etc/fstab"
+echo -E "${C}genfstab${E} -U /mnt >> /mnt/etc/fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 echo
 echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
