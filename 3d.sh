@@ -44,6 +44,6 @@ then
     chmod +x install.sh
     ./install.sh
 fi
-echo
+echo "${G}3D install phase DONE${E}"
 exit 0
 
