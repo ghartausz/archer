@@ -234,7 +234,7 @@ fi
 echo
 echo -e "${B}Unmounting everything${E}:"
 echo "If not successful type 'umount -R /mnt'"
-exit
+exit 
 umount -R /mnt
 
 
