@@ -203,7 +203,34 @@ echo
 echo -e "${G}Updating system${E}:"
 pacman -Syu
 echo
-echo -e "${R}DONE${E}"
+echo -e "${R}DONE, at leas with the basic ones${E}"
+echo
+read -p "Do you want to install wmware guest system tools? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    pacman -S gtkmm open-vm-tools --noconfirm
+    pacman -S xf86-video-vmware xf86-input-vmmouse
+    systemctl enable vmtoolsd.service 
+    systemctl enable vmware-vmblock-fuse.service
+fi
+read -p "Installing GNOME DE? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    pacman -S --noconfirm xorg gdm gnome gnome-extra
+    systemctl enable gdm.service
+fi
+read -p "Sekiro GRUB theme? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    pacman -S --noconfirm git
+    git clone https://github.com/semimqmo/sekiro_grub_theme.git
+    cd sekiro_grub_theme
+    chmod +x install.sh
+    ./install.sh
+fi
 echo
 echo -e "${B}Unmounting everything${E}:"
 echo "If not successful type 'umount -R /mnt'"
