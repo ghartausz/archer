@@ -221,7 +221,7 @@ while true; do
                 chmod +x /~/3d.sh; break;;
         [Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
   							echo    # (optional) move to a new line
-								if [[ ! $REPLY =~ ^[Yy]$ ]]
+								if [[ $REPLY =~ ^[Yy]$ ]]
 								then
     							pacman -S gtkmm open-vm-tools --noconfirm
     							pacman -S xf86-video-vmware xf86-input-vmmouse
@@ -230,13 +230,13 @@ while true; do
 								fi
 								read -p "Installing GNOME DE? " -n 1 -r
 								echo    # (optional) move to a new line
-								if [[ ! $REPLY =~ ^[Yy]$ ]]
+								if [[ $REPLY =~ ^[Yy]$ ]]
 									then
 											pacman -S --noconfirm xorg gdm gnome gnome-extra
 											systemctl enable gdm.service
 											read -p "Disable Wayland for better 3D acceleration? " -n 1 -r
 											echo    # (optional) move to a new line
-											if [[ ! $REPLY =~ ^[Yy]$ ]]
+											if [[ $REPLY =~ ^[Yy]$ ]]
 												then
 												sed -i '/Wayland/s/^#//g/' /etc/gdm/custom.conf
 												cat /etc/gdm/custom.conf
@@ -244,7 +244,7 @@ while true; do
 									fi
 									read -p "Sekiro GRUB theme? " -n 1 -r
 									echo    # (optional) move to a new line
-									if [[ ! $REPLY =~ ^[Yy]$ ]]
+									if [[ $REPLY =~ ^[Yy]$ ]]
 									then
 											pacman -S --noconfirm git
 											git clone https://github.com/semimqmo/sekiro_grub_theme.git
