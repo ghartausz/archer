@@ -217,55 +217,53 @@ read -p "Do you want to install the 3D stuff ${G}now${E} [press ${G}Y${E}] or ${
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-    sed -n '226,$p' inst.sh > /~/3d.sh
+    sed -n '224,$p' inst.sh > /~/3d.sh
     chmod +x /~/3d.sh
-    echo -e "Copying ${G}3D stuff ${E} to ${P}/~/3d.sh ${E}"  
-    
-fi
-echo
-
-while true; do
-    read -p "Do you want to install the 3d stuff later? Y/N" yn
-    case $yn in
-        [Yy]* ) sed -n '226,$p' inst.sh > /~/3d.sh
-                chmod +x /~/3d.sh; break;;
-        [Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
-  							echo    # (optional) move to a new line
-								if [[ $REPLY =~ ^[Yy]$ ]]
-								then
-    							pacman -S gtkmm open-vm-tools --noconfirm
-    							pacman -S xf86-video-vmware xf86-input-vmmouse
-    							systemctl enable vmtoolsd.service 
-    							systemctl enable vmware-vmblock-fuse.service
-								fi
-								read -p "Installing GNOME DE? " -n 1 -r
+    echo -e "Copied the ${G}3D stuff${E} to ${P}/~/3d.sh ${E}"  
+else    
+	while true; do
+	    read -p "Do you want to install the 3D stuff later? Y/N" yn
+	    case $yn in
+		[Yy]* ) sed -n '224,$p' inst.sh > /~/3d.sh
+			chmod +x /~/3d.sh; break;;
+		[Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
 								echo    # (optional) move to a new line
-								if [[ $REPLY =~ ^[Yy]$ ]]
-									then
-											pacman -S --noconfirm xorg gdm gnome gnome-extra
-											systemctl enable gdm.service
-											read -p "Disable Wayland for better 3D acceleration? " -n 1 -r
-											echo    # (optional) move to a new line
-											if [[ $REPLY =~ ^[Yy]$ ]]
-												then
-												sed -i '/Wayland/s/^#//g/' /etc/gdm/custom.conf
-												cat /etc/gdm/custom.conf
-										fi
-									fi
-									read -p "Sekiro GRUB theme? " -n 1 -r
-									echo    # (optional) move to a new line
 									if [[ $REPLY =~ ^[Yy]$ ]]
 									then
-											pacman -S --noconfirm git
-											git clone https://github.com/semimqmo/sekiro_grub_theme.git
-											cd sekiro_grub_theme
-											chmod +x install.sh
-											./install.sh
+								pacman -S gtkmm open-vm-tools --noconfirm
+								pacman -S xf86-video-vmware xf86-input-vmmouse
+								systemctl enable vmtoolsd.service 
+								systemctl enable vmware-vmblock-fuse.service
 									fi
-									echo;break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-  done  
+									read -p "Installing GNOME DE? " -n 1 -r
+									echo    # (optional) move to a new line
+									if [[ $REPLY =~ ^[Yy]$ ]]
+										then
+												pacman -S --noconfirm xorg gdm gnome gnome-extra
+												systemctl enable gdm.service
+												read -p "Disable Wayland for better 3D acceleration? " -n 1 -r
+												echo    # (optional) move to a new line
+												if [[ $REPLY =~ ^[Yy]$ ]]
+													then
+													sed -i '/Wayland/s/^#//g/' /etc/gdm/custom.conf
+													cat /etc/gdm/custom.conf
+											fi
+										fi
+										read -p "Sekiro GRUB theme? " -n 1 -r
+										echo    # (optional) move to a new line
+										if [[ $REPLY =~ ^[Yy]$ ]]
+										then
+												pacman -S --noconfirm git
+												git clone https://github.com/semimqmo/sekiro_grub_theme.git
+												cd sekiro_grub_theme
+												chmod +x install.sh
+												./install.sh
+										fi
+										echo;break;;
+		* ) echo "Please answer yes or no.";;
+	    esac
+	  done
+fi  
 echo
 echo -e "${B}Unmounting everything${E}:"
 echo "If not successful type 'umount -R /mnt'"
