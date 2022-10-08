@@ -30,15 +30,17 @@ lsblk
 echo
 echo -e "Choose the disk/device for ${B}partitioning ${E}, like sda, sdb, etc.: "
 read -r thesda
+echo
 echo -e "${B}Partitioning${E} with gdisk utility: "
+echo
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
+echo
 echo -e "For basic ${P}Boot partitions${E}, Size: ${G}+300M${E} Hex code: ${P}ef00${E}  "
 echo
 gdisk /dev/"$thesda"
 echo
-#lslblk
+lslblk
 echo -e "${B}Formating${E} the partitions: "
-
 echo -e "Give the ${R}root partition${E} or hit ENTER: "
 read -r root 
 if [ -n "$root" ];
@@ -48,10 +50,10 @@ then
     case $yn in
         [Yy]* ) echo "mkfs.ext4 /dev/$root"
                 mkfs.ext4 /dev/$root
-                echo "mount /dev/$root /mnt"
+                echo "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
                 mount /dev/"$root" /mnt; break;;
-        [Nn]* ) echo "mount /dev/$root /mnt"
-                mount /dev/"$root" /mnt;break;;
+        [Nn]* ) echo "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
+                mount /dev/"$root" /mnt; break;;
         * ) echo "Please answer yes or no.";;
     esac
   done  
@@ -85,7 +87,7 @@ then
 else echo -e "It's ${C}OK${E}"
 fi
 
-
+echo
 echo -e "Choose the ${C}swap partition${E}: "
 read -r swap 
 if [ -n "$swap" ];
@@ -94,7 +96,7 @@ then
   mkswap /dev/$swap
   echo "swapon /dev/$swap"
   swapon /dev/"$swap"
-else echo -e "It's ${C}OK${E}"
+else echo -e "It's ${G}OK${E}"
 fi
 echo
 echo -e "The created ${LB}partition${E} table with ${LB}mounted partitions${E}:"
@@ -120,16 +122,16 @@ echo
 echo -e "${C}genfstab${E} -U /mnt >> /mnt/etc/fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 echo
-echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
+echo -e "Switching from the live ${Y}iso/arch install${E} to the recently installed ${C}Arch Linux${E}"
 #echo -e "Download the git package with: git clone https://github.com/ghartausz/archer.git"
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-sed -n '136,$p' doer.sh > /mnt/inst.sh
+sed -n '138,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 echo
-read -r -s -p $"Press ENTER to go forward with the installation.."
+read -r -s -p $"Press "${G}ENTER"${E} to go forward with the installation.."
 echo
 arch-chroot /mnt ./inst.sh
 exit 0
@@ -154,14 +156,14 @@ echo -e "Type your ${Y}Time${E} ${Y}zone${E} from the above list"
 read -r timezone
 ls /usr/share/zoneinfo/"$timezone"
 echo
-echo -e "Type your ${Y}City${E} from $timezone"
+echo -e "Type your ${Y}City${E} from "${C}$timezone"${G}"
 read -r city
 echo "ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime"
 ln -sf /usr/share/zoneinfo/"$timezone"/"$city" /etc/localtime
 echo "hwclock --systohc"
 hwclock --systohc
 echo
-read -r -s -p $"Press enter to go forward with the installation.."
+read -r -s -p $"Press "${G}ENTER"${E} to go forward with the installation.."
 echo 
 echo -e "${B}Uncommenting${E}the en_US.UTF-8 UTF-8 line"
 sed -i '19,$s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
@@ -190,7 +192,7 @@ echo -e "Next step...${P}bootloader${E}"
 echo
 echo -e "Installing ${G}GRUB${E}"
 echo
-pacman -S grub efibootmgr os-prober ntfs-3g
+pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable 
 grub-mkconfig -o /boot/grub/grub.cfg
 echo
@@ -218,14 +220,14 @@ read -p "Do you want to install the 3D stuff ${G}now${E} [press ${G}Y${E}] or ${
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-    sed -n '225,$p' inst.sh > /~/3d.sh
+    sed -n '227,$p' inst.sh > /~/3d.sh
     chmod +x /~/3d.sh
     echo -e "Copied the ${G}3D stuff${E} to ${P}/~/3d.sh ${E}"  
 else    
 	while true; do
 	    read -p "Do you want to install the 3D stuff later? Y/N" yn
 	    case $yn in
-		[Yy]* ) sed -n '225,$p' inst.sh > /~/3d.sh
+		[Yy]* ) sed -n '227,$p' inst.sh > /~/3d.sh
 			chmod +x /~/3d.sh; break;;
 		[Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
 								echo    # (optional) move to a new line
