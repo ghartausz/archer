@@ -183,7 +183,9 @@ echo -e "Installing some packages like ${G}networkmanager${E} ${P}nano${E} ${P}b
 pacman -S --noconfirm networkmanager nano base-devel
 echo
 echo -e "Next step...bootloader"
+echo
 echo -e "Installing ${G}GRUB${E}"
+echo
 pacman -S grub efibootmgr os-prober ntfs-3g
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB --removable 
 grub-mkconfig -o /boot/grub/grub.cfg
