@@ -14,7 +14,7 @@ read -p "Do you want to install wmware guest system tools? " -n 1 -r
 									if [[ $REPLY =~ ^[Yy]$ ]]
 									then
 								pacman -S gtkmm open-vm-tools --noconfirm
-								pacman -S xf86-video-vmware xf86-input-vmmouse
+								pacman -S xf86-video-vmware xf86-input-vmmouse --noconfirm
 								systemctl enable vmtoolsd.service 
 								systemctl enable vmware-vmblock-fuse.service
 									fi
@@ -22,7 +22,7 @@ read -p "Do you want to install wmware guest system tools? " -n 1 -r
 									echo    # (optional) move to a new line
 									if [[ $REPLY =~ ^[Yy]$ ]]
 										then
-												pacman -S --noconfirm xorg gdm gnome gnome-extra
+												pacman -S --noconfirm xorg gdm gnome gnome-extra --noconfirm
 												systemctl enable gdm.service
 												read -p "Disable Wayland for better 3D acceleration? " -n 1 -r
 												echo    # (optional) move to a new line
