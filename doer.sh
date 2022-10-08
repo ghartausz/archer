@@ -213,19 +213,21 @@ pacman -Syu
 echo
 echo -e "${R}DONE, at least with the basic ones${E}"
 echo
-read -p "Do you want to install the 3d stuff later? " -n 1 -r
+read -p "Do you want to install the 3D stuff ${G}now${E} [press ${G}Y${E}] or ${R}later${E} [press ${R}N/n ${E}] ? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-    sed -n '216,$p' inst.sh > /~/3d.sh
+    sed -n '226,$p' inst.sh > /~/3d.sh
     chmod +x /~/3d.sh
+    echo -e "Copying ${G}3D stuff ${E} to ${P}/~/3d.sh ${E}"  
+    
 fi
 echo
 
 while true; do
     read -p "Do you want to install the 3d stuff later? Y/N" yn
     case $yn in
-        [Yy]* ) sed -n '215,$p' inst.sh > /~/3d.sh
+        [Yy]* ) sed -n '226,$p' inst.sh > /~/3d.sh
                 chmod +x /~/3d.sh; break;;
         [Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
   							echo    # (optional) move to a new line
