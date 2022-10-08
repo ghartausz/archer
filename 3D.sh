@@ -9,12 +9,7 @@ B="\e[34m" #BLUE
 P="\e[35m" #PURPLE
 Y="\e[33m" #YELLOW
 
-while true; do
-	    read -p "Do you want to install the 3D stuff later? Y/N" yn
-	    case $yn in
-		[Yy]* ) sed -n '228,$p' inst.sh > /home/$username/3d.sh
-			chmod +x /home/$username/3d.sh; break;;
-		[Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
+read -p "Do you want to install wmware guest system tools? " -n 1 -r
 								echo    # (optional) move to a new line
 									if [[ $REPLY =~ ^[Yy]$ ]]
 									then
@@ -48,6 +43,4 @@ while true; do
 												./install.sh
 										fi
 										echo;break;;
-		* ) echo "Please answer yes or no.";;
-	    esac
-	  done
+	
