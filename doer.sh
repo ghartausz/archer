@@ -28,7 +28,7 @@ echo
 echo -e "${B}Identifying${E} devices and paritions: "
 lsblk
 echo
-echo -e "Choose the disk/device for ${B}partitioning ${E}: "
+echo -e "Choose the disk/device for ${B}partitioning ${E}, like sda, sdb, etc.: "
 read -r thesda
 echo -e "${B}Partitioning${E} with gdisk utility: "
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
@@ -54,9 +54,11 @@ then
         * ) echo "Please answer yes or no.";;
     esac
   done  
-else echo "tralla"
+else echo  "Its ${C}OK${E}"
 fi
-
+echo 
+lsblk
+echo
 echo -e "Give the ${LB}boot/efi partition${E} or hit ENTER: "
 read -r boot 
 if [ -n "$boot" ];
@@ -79,7 +81,7 @@ then
         * ) echo "Please answer yes or no.";;
     esac
   done  
-else echo "tralla"
+else echo "Its ${C}OK${E}"
 fi
 
 
