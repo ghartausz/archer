@@ -42,5 +42,4 @@ read -p "Do you want to install wmware guest system tools? " -n 1 -r
 												chmod +x install.sh
 												./install.sh
 										fi
-										echo;break;;
-	
+									
