@@ -32,6 +32,7 @@ echo -e "Choose the disk/device for ${B}partitioning ${E}, like sda, sdb, etc.: 
 read -r thesda
 echo -e "${B}Partitioning${E} with gdisk utility: "
 echo -e "${B}commands${E}: ${B}o${E} -new GUID partition table, ${B}n${E} -new partition, ${B}w${E} -write table to disk ${B}q${E} -quit program "
+echo -e "For basic ${P}Boot partitions${E}, Size: ${G}+300M${E} Hex code: ${P}ef00${E}  "
 echo
 gdisk /dev/"$thesda"
 echo
@@ -124,7 +125,7 @@ echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-sed -n '135,$p' doer.sh > /mnt/inst.sh
+sed -n '136,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 echo
@@ -217,14 +218,14 @@ read -p "Do you want to install the 3D stuff ${G}now${E} [press ${G}Y${E}] or ${
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-    sed -n '224,$p' inst.sh > /~/3d.sh
+    sed -n '225,$p' inst.sh > /~/3d.sh
     chmod +x /~/3d.sh
     echo -e "Copied the ${G}3D stuff${E} to ${P}/~/3d.sh ${E}"  
 else    
 	while true; do
 	    read -p "Do you want to install the 3D stuff later? Y/N" yn
 	    case $yn in
-		[Yy]* ) sed -n '224,$p' inst.sh > /~/3d.sh
+		[Yy]* ) sed -n '225,$p' inst.sh > /~/3d.sh
 			chmod +x /~/3d.sh; break;;
 		[Nn]* ) read -p "Do you want to install wmware guest system tools? " -n 1 -r
 								echo    # (optional) move to a new line
