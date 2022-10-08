@@ -207,7 +207,7 @@ echo
 echo -e "${G}Updating system${E}:"
 pacman -Syu
 echo
-echo -e "${R}DONE, at leas with the basic ones${E}"
+echo -e "${R}DONE, at least with the basic ones${E}"
 echo
 read -p "Do you want to install the 3d stuff later? " -n 1 -r
 echo    # (optional) move to a new line
