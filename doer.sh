@@ -54,7 +54,7 @@ then
         * ) echo "Please answer yes or no.";;
     esac
   done  
-else echo  "Its ${C}OK${E}"
+else echo -e "It's ${C}OK${E}"
 fi
 echo 
 lsblk
@@ -81,7 +81,7 @@ then
         * ) echo "Please answer yes or no.";;
     esac
   done  
-else echo "Its ${C}OK${E}"
+else echo -e "It's ${C}OK${E}"
 fi
 
 
@@ -93,10 +93,11 @@ then
   mkswap /dev/$swap
   echo "swapon /dev/$swap"
   swapon /dev/"$swap"
-else echo "tralla"
+else echo -e "It's ${C}OK${E}"
 fi
 echo
 echo -e "The created ${LB}partition${E} table with ${LB}mounted partitions${E}:"
+echo
 lsblk
 echo
 #echo -e "Press ${G}ENTER${E} to continue..."
@@ -123,10 +124,12 @@ echo -e "Switching from  the live ${Y}iso/arch install${E} to the recently insta
 echo
 echo -e "${R}First part ENDED${E}"
 echo
-sed -n '130,$p' doer.sh > /mnt/inst.sh
+sed -n '135,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
+echo
 read -r -s -p $"Press ENTER to go forward with the installation.."
+echo
 arch-chroot /mnt ./inst.sh
 exit 0
 
@@ -179,10 +182,10 @@ mkinitcpio -P
 echo -e "Type in your ${R}root password${E}:"
 passwd
 echo
-echo -e "Installing some packages like ${G}networkmanager${E} ${P}nano${E} ${P}base-devel${E}..."
+echo -e "Installing some packages like ${G}networkmanager${E} ${R}nano${E} ${P}base-devel${E}..."
 pacman -S --noconfirm networkmanager nano base-devel
 echo
-echo -e "Next step...bootloader"
+echo -e "Next step...${P}bootloader${E}"
 echo
 echo -e "Installing ${G}GRUB${E}"
 echo
@@ -197,6 +200,7 @@ read username
 useradd -m $username
 usermod -aG wheel $username
 echo "$username ALL=(ALL) ALL" >> /etc/sudoers.d/$username
+echo
 passwd $username
 echo
 echo -e "Adding 32bit support, uncommenting ${Y}multilib${E}:"
