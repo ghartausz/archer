@@ -1,0 +1,50 @@
+echo
+echo -e "Running basic checks"
+ls /sys/firmware/efi/efivars
+ip link
+ping -c 3 google.com
+timedatectl set-ntp true
+
+echo -e "Goin' the ${R}faster${E} route, assuming: hostname isildur, username ghartausz, time: Europe/Bucharest, using the disk given, creating a new GUID Partition Table, 1st Boot partition 512MB, 
+2nd: Root partition the rest. Formating them. No swap partition."
+echo
+ while true; do
+    read -p "Do you want the faster method? Y/N" yn
+    case $yn in
+        [Yy]* ) echo -e "Enter the  ${B}device${E} you want to install to (e.g. /dev/sda):"
+		read device
+		parted -s "$device" mklabel gpt
+		parted -s "$device" mkpart "EFI system partition" fat32 1MiB 512MiB
+		parted -s "$device" set 1 esp on
+		mkfs.fat -F32 "${device}1"
+		parted -s "$device" mkpart "root partition" ext4 512MiB 100%
+		parted -s "$device" set 2 lvm on
+		mkfs.ext4 "${device}2"
+		mount "${device}2" /mnt
+		mount --mkdir ${device}1" /mnt/boot
+		mkdir /mnt/efi
+		mount "${device}1" /mnt/boot
+		echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+		reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mirrorlist
+		sudo pacman -S archlinux-keyring
+		pacstrap /mnt base
+
+; break;;
+        [Nn]* ) ;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done  
+
+
+if [ -n "$swap" ];
+then
+  echo "mkswap /dev/$swap"
+  mkswap /dev/$swap
+  echo "swapon /dev/$swap"
+  swapon /dev/"$swap"
+else echo -e "It's ${G}OK${E}"
+fi
+
+
+
+
