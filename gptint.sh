@@ -13,6 +13,7 @@ fi
 timedatectl set-ntp true
 
 # Prompt user for installation details
+lsblk
 echo "Enter the device you want to install to (e.g. /dev/sda):"
 read device
 
@@ -47,8 +48,13 @@ mount "${device}1" /mnt
 
 # Set the mirrorlist to use the kernel.org mirrors
 echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+rankmirrors -n 6 /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.new
+mv /etc/pacman.d/mirrorlist.new /etc/pacman.d/mirrorlist
+
 
 # Install the base system to the root partition
+sudo pacman -S archlinux-keyring
 pacstrap /mnt base
 
 # Generate fstab file
