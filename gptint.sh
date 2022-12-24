@@ -48,7 +48,7 @@ mount "${device}1" /mnt
 
 # Set the mirrorlist to use the kernel.org mirrors
 echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-reflector --country Romania, --protocol https --latest 5
+reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mirrorlist
 
 # Install the base system to the root partition
 sudo pacman -S archlinux-keyring
