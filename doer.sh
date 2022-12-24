@@ -50,9 +50,9 @@ then
     case $yn in
         [Yy]* ) echo "mkfs.ext4 /dev/$root"
                 mkfs.ext4 /dev/$root
-                echo "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
+                echo -e "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
                 mount /dev/"$root" /mnt; break;;
-        [Nn]* ) echo "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
+        [Nn]* ) echo -e "${B}mount${B} ${R}/dev/$root${B} ${B}/mnt${E}"
                 mount /dev/"$root" /mnt; break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -131,7 +131,8 @@ sed -n '138,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 echo
-read -r -s -p $"Press "${G}ENTER"${E} to go forward with the installation.."
+echo -e 
+read -r -s -p $"Press "${G}ENTER${E}" to go forward with the installation.."
 echo
 arch-chroot /mnt ./inst.sh
 exit 0
