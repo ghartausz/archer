@@ -39,7 +39,7 @@ echo -e "For basic ${P}Boot partitions${E}, Size: ${G}+300M${E} Hex code: ${P}ef
 echo
 gdisk /dev/"$thesda"
 echo
-lslblk
+lsblk
 echo -e "${B}Formating${E} the partitions: "
 echo -e "Give the ${R}root partition${E} or hit ENTER: "
 read -r root 
