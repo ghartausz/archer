@@ -29,7 +29,7 @@ mkfs.ext4 "${device}2"
 mount "${device}2" /mnt
 mount --mkdir "${device}1" /mnt/boot
 echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mirrorlist
+reflector --country Romania, --protocol https --latest 10 --save /etc/pacman.d/mirrorlist --fastest 10
 sudo pacman -S archlinux-keyring
 pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
