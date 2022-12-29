@@ -74,11 +74,11 @@ then
     case $yn in
         [Yy]* ) echo "mkfs.fat -F32 /dev/$boot"
                 mkfs.fat -F32 /dev/$boot 
-                echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
-                echo "mkdir /mnt/efi" 
-                mkdir /mnt/efi
-                echo "mount /dev/$boot /mnt/efi"
-                mount /dev/"$boot" /mnt/efi;break;;
+                #echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
+                echo "mkdir /mnt/boot" 
+                #mkdir /mnt/efi
+                echo "mount /dev/$boot /mnt/boot"
+                mount /dev/"$boot" /mnt/boot;break;;
         [Nn]* ) echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
                 echo "mkdir /mnt/efi" 
                 mkdir /mnt/efi
@@ -111,6 +111,9 @@ echo
     read -p "Do you want to install the firmware? Y/N" yn
     case $yn in
         [Yy]* ) echo -e "Installing ${Y}Essential packages${E}, like ${P}base linux linux-firmware${E} and ${G}git${E} ofc"
+                echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+                reflector --country Romania, --protocol https --latest 10 --save /etc/pacman.d/mirrorlist --fastest 10
+                sudo pacman -S archlinux-keyring
                 echo "pacstrap /mnt base linux linux-firmware"
                 pacstrap /mnt base linux linux-firmware; break;;
         [Nn]* ) echo "firmware install skipped";break;;
@@ -134,7 +137,7 @@ sed -n '138,$p' doer.sh > /mnt/inst.sh
 chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 echo
-echo -e 
+echo -e "Press "${G}ENTER${E}" to go forward with the installation.."
 read -r -s -p $"Press "${G}ENTER${E}" to go forward with the installation.."
 echo
 arch-chroot /mnt ./inst.sh
