@@ -48,10 +48,10 @@ echo "127.0.1.1 isildur.localdomain isildur" >> /mnt/etc/hosts
 arch-chroot /mnt /bin/bash -c "useradd ghartausz" 
 useradd ghartausz
 arch-chroot /mnt /bin/bash -c  "usermod -aG wheel $username"
-echo "$username ALL=(ALL) ALL" >> /mnt/etc/sudoers
+echo "$ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
 echo "root password"
 echo "root:$rootpassword" | chpasswd --root /mnt
-echo "$username:$password" | chpasswd --root /mnt
+echo "$ghartausz:$password" | chpasswd --root /mnt
 
 arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm networkmanager nano"
 arch-chroot /mnt /bin/bash -c "pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm"
