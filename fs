@@ -32,7 +32,7 @@ reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mi
 sudo pacman -S archlinux-keyring
 pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt
+arch-chroot /mnts
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 hwclock --systohc
 
