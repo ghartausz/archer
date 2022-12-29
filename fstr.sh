@@ -19,10 +19,10 @@ echo
 echo "Enter the device you want to install to (e.g. /dev/sda):"
 read device
 parted -s "$device" mklabel gpt
-parted -s "$device" mkpart primary "EFI system partition" fat32 1MiB 512MiB
+parted -s "$device" mkpart "EFI_system_partition" fat32 1MiB 512MiB
 parted -s "$device" set 1 esp on
 mkfs.fat -F32 "${device}1"
-parted -s "$device" mkpart primary  "root partition" ext4 512MiB 100%
+parted -s "$device" mkpart "root_partition" ext4 512MiB 100%
 parted -s "$device" set 2 lvm on
 mkfs.ext4 "${device}2"
 mount "${device}2" /mnt
