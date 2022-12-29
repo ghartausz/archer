@@ -46,7 +46,7 @@ echo "::1 localhost" >> /etc/hosts
 echo "127.0.1.1 isildur.localdomain isildur" >> /etc/hosts
 
 useradd ghartausz
-usermod -aG wheel $usernames
+usermod -aG wheel ghartausz
 echo "ghartausz ALL=(ALL) ALL" >> /etc/sudoers
 echo "root password"
 echo "root:$rootpassword" | chpasswd --root 
