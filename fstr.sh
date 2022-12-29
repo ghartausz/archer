@@ -3,14 +3,14 @@
 set -e
 
 # Ensure script is run as root
-#if [ "$EUID" -ne 0 ];
-#then
-#    echo "Please run as root"
-#    exit
-#fi
+if [ "$EUID" -ne 0 ];
+then
+    echo "Please run as root"
+    exit
+fi
 
 timedatectl set-ntp true
-timezone="Europe/Bucharest"
+timezone= " Europe/Bucharest"
 ls /sys/firmware/efi/efivars
 ip link
 ping -c 3 google.com
@@ -26,7 +26,7 @@ parted -s "$device" mkpart "root_partition" ext4 512MiB 100%
 parted -s "$device" set 2 lvm on
 mkfs.ext4 "${device}2"
 mount "${device}2" /mnt
-mount --mkdir ${device}1" /mnt/boot
+mount --mkdir "${device}1" /mnt/boot
 echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mirrorlist
 sudo pacman -S archlinux-keyring
@@ -47,7 +47,7 @@ echo "127.0.1.1 isildur.localdomain isildur" >> /mnt/etc/hosts
 
 arch-chroot /mnt /bin/bash -c "useradd ghartausz" 
 arch-chroot /mnt /bin/bash -c  "usermod -aG wheel $username"
-echo "ghartausz ALL=\(ALL\) ALL" >> /mnt/etc/sudoers
+echo "ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
 echo "root password"
 echo "root:$rootpassword" | chpasswd --root /mnt
 echo "ghartausz:$password" | chpasswd --root /mnt
