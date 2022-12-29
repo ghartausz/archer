@@ -54,7 +54,7 @@ echo "ghartausz:$password" | chpasswd --root /mnt
 
 pacman -S --noconfirm networkmanager nano
 pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable 
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
 grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
 umount -R /mnt
