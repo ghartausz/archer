@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
