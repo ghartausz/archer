@@ -17,7 +17,7 @@ ping -c 3 google.com
 lsblk
 echo
 echo "Enter the device you want to install to (e.g. /dev/sda):"
-read device
+read -r device
 parted -s "$device" mklabel gpt
 parted -s "$device" mkpart "EFI_system_partition" fat32 1MiB 512MiB
 parted -s "$device" set 1 esp on
