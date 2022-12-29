@@ -32,12 +32,12 @@ reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mi
 sudo pacman -S archlinux-keyring
 pacstrap /mnt base
 genfstab -U /mnt >> /mnt/etc/fstab
-
-arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime"
-arch-chroot /mnt /bin/bash -c "hwclock --systohc"
+arch-chroot /mnt
+ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
+hwclock --systohc
 
 echo "en_US.UTF-8" >> /mnt/etc/locale.gen
-arch-chroot /mnt /bin/bash -c "locale-gen"
+locale-gen
 
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
@@ -45,16 +45,16 @@ echo "127.0.0.1 localhost" > /mnt/etc/hosts
 echo "::1 localhost" >> /mnt/etc/hosts
 echo "127.0.1.1 isildur.localdomain isildur" >> /mnt/etc/hosts
 
-arch-chroot /mnt /bin/bash -c "useradd ghartausz" 
-arch-chroot /mnt /bin/bash -c  "usermod -aG wheel $username"
+useradd ghartausz
+usermod -aG wheel $username
 echo "ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
 echo "root password"
 echo "root:$rootpassword" | chpasswd --root /mnt
 echo "ghartausz:$password" | chpasswd --root /mnt
 
-arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm networkmanager nano"
-arch-chroot /mnt /bin/bash -c "pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm"
-arch-chroot /mnt /bin/bash -c "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable "
-arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
-arch-chroot /mnt /bin/bash -c "systemctl enable NetworkManager"
-arch-chroot /mnt /bin/bash -c "umount -R /mnt"
+pacman -S --noconfirm networkmanager nano
+pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable 
+grub-mkconfig -o /boot/grub/grub.cfg
+systemctl enable NetworkManager
+umount -R /mnt
