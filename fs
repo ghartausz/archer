@@ -36,25 +36,26 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 hwclock --systohc
 
-echo "en_US.UTF-8" >> /mnt/etc/locale.gen
+echo "en_US.UTF-8" >> /etc/locale.gen
 locale-gen
 
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
-echo "127.0.0.1 localhost" > /mnt/etc/hosts
-echo "::1 localhost" >> /mnt/etc/hosts
-echo "127.0.1.1 isildur.localdomain isildur" >> /mnt/etc/hosts
+echo "127.0.0.1 localhost" > /etc/hosts
+echo "::1 localhost" >> /etc/hosts
+echo "127.0.1.1 isildur.localdomain isildur" >> /etc/hosts
 
 useradd ghartausz
 usermod -aG wheel $username
-echo "ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
+echo "ghartausz ALL=(ALL) ALL" >> /etc/sudoers
 echo "root password"
-echo "root:$rootpassword" | chpasswd --root /mnt
-echo "ghartausz:$password" | chpasswd --root /mnt
+echo "root:$rootpassword" | chpasswd --root 
+echo "ghartausz:$password" | chpasswd --root 
 
 pacman -S --noconfirm networkmanager nano
 pacman -S grub efibootmgr os-prober ntfs-3g --noconfirm
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
 grub-mkconfig -o /boot/grub/grub.cfg
 systemctl enable NetworkManager
+exit
 umount -R /mnt
