@@ -3,11 +3,11 @@
 set -e
 
 # Ensure script is run as root
-if [ "$EUID" -ne 0 ]
-then
-    echo "Please run as root"
-    exit
-fi
+#if [ "$EUID" -ne 0 ];
+#then
+#    echo "Please run as root"
+#    exit
+#fi
 
 timedatectl set-ntp true
 timezone="Europe/Bucharest"
