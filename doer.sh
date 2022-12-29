@@ -28,7 +28,10 @@ echo
 echo -e "${B}Identifying${E} devices and paritions: "
 lsblk
 echo
-echo -e "Choose the disk/device for ${B}partitioning ${E}, like sda, sdb, etc.: "
+
+
+
+echo -e "Enter the disk/device for ${B}partitioning ${E}, like sda, sdb, etc.: "
 read -r thesda
 echo
 echo -e "${B}Partitioning${E} with gdisk utility: "
