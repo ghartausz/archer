@@ -14,7 +14,6 @@ timezone="Europe/Bucharest"
 ls /sys/firmware/efi/efivars
 ip link
 ping -c 3 google.com
-umount -R /mnt
 lsblk
 echo
 echo "Enter the device you want to install to (e.g. /dev/sda):"
