@@ -31,7 +31,7 @@ echo "Server = http://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacm
 reflector --country Romania, --protocol https --latest 5 --save /etc/pacman.d/mirrorlist
 sudo pacman -S archlinux-keyring
 pacstrap /mnt base
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstabs
 
 arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime"
 arch-chroot /mnt /bin/bash -c "hwclock --systohc"
