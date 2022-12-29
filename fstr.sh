@@ -47,7 +47,7 @@ echo "127.0.1.1 isildur.localdomain isildur" >> /mnt/etc/hosts
 
 arch-chroot /mnt /bin/bash -c "useradd ghartausz" 
 arch-chroot /mnt /bin/bash -c  "usermod -aG wheel $username"
-echo "ghartausz ALL=(ALL) ALL" >> /mnt/etc/sudoers
+echo "ghartausz ALL=\(ALL\) ALL" >> /mnt/etc/sudoers
 echo "root password"
 echo "root:$rootpassword" | chpasswd --root /mnt
 echo "ghartausz:$password" | chpasswd --root /mnt
