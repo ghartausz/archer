@@ -138,9 +138,11 @@ chmod +x /mnt/inst.sh
 echo -e "${G}Second file comitted ok${E}"
 echo
 echo -e "Press "${G}ENTER${E}" to go forward with the installation.."
-read -r -s -p $"Press "${G}ENTER${E}" to go forward with the installation.."
+read -r -s -p $""
 echo
-arch-chroot /mnt ./inst.sh
+arch-chroot /mnt 
+chmod +x /mnt/inst.sh
+exec ./inst.sh
 exit 0
 
 #---SECOND PART---#
