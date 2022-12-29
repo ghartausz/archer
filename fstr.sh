@@ -10,7 +10,7 @@ then
 fi
 
 timedatectl set-ntp true
-timezone= " Europe/Bucharest"
+timezone="Europe/Bucharest"
 ls /sys/firmware/efi/efivars
 ip link
 ping -c 3 google.com
