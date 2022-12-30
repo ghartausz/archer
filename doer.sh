@@ -49,7 +49,7 @@ read -r root
 if [ -n "$root" ];
 then 
   while true; do
-    read -p "Do you want to formate this partition? Y/N" yn
+    read -p "Do you want to formate this partition? Y/N " yn
     case $yn in
         [Yy]* ) echo "mkfs.ext4 /dev/$root"
                 mkfs.ext4 /dev/$root
@@ -70,16 +70,16 @@ read -r boot
 if [ -n "$boot" ];
 then 
   while true; do
-    read -p "Do you want to formate this partition? Y/N" yn
+    read -p "Do you want to formate this partition? Y/N " yn
     case $yn in
         [Yy]* ) echo "mkfs.fat -F32 /dev/$boot"
                 mkfs.fat -F32 /dev/$boot 
                 #echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
                 echo "mkdir /mnt/boot" 
-                #mkdir /mnt/efi
+                mkdir /mnt/boot
                 echo "mount /dev/$boot /mnt/boot"
                 mount /dev/"$boot" /mnt/boot;break;;
-        [Nn]* ) echo -e "${G}Creating${E} the ${C}EFI${E} folder and ${B}Mounting${E} it: "
+        [Nn]* ) echo -e "${G}Creating${E} the ${C}Boot${E} folder and ${B}Mounting${E} it: "
                 echo "mkdir /mnt/boot" 
                 mkdir /mnt/boot
                 echo "mount /dev/$boot /mnt/boot"
@@ -99,7 +99,7 @@ then
   mkswap /dev/$swap
   echo "swapon /dev/$swap"
   swapon /dev/"$swap"
-else echo -e "It's ${G}OK${E}"
+else echo -e "It's ${G}OK${E} no ${C}swap partition${E} created "
 fi
 echo
 echo -e "The created ${LB}partition${E} table with ${LB}mounted partitions${E}:"
@@ -115,7 +115,7 @@ echo
                 reflector --country Romania, --protocol https --latest 10 --save /etc/pacman.d/mirrorlist --fastest 10
                 sudo pacman -S archlinux-keyring
                 echo "pacstrap /mnt base linux linux-firmware"
-                pacstrap /mnt base linux linux-firmware; break;;
+                pacstrap /mnt base base-devel linux linux-firmware; break;;
         [Nn]* ) echo "firmware install skipped";break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -280,6 +280,7 @@ fi
 echo
 echo -e "${B}Unmounting everything${E}:"
 echo "If not successful type 'umount -R /mnt'"
+umount -R /mnt
 exit 
 umount -R /mnt
 
